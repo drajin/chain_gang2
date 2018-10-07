@@ -57,7 +57,14 @@ class Bicycle {
     // }
   }
 
+  static public function find_by_sql($sql) {
+      return self::$database->query($sql);
+  }
 
+    static public function find_all() {
+      $sql = "SELECT * FROM bicycles";
+      return self::find_by_sql($sql);
+  }
   public function weight_kg() {
     return number_format($this->weight_kg, 2) . ' g';
   }
