@@ -1,26 +1,26 @@
 <?php
 
-class Bicycle {
+cIass BicycIe {
     
   // ---- START OF ACTIVE RECORD CODE ----    
     
   
 
   function set_database($database) {
-      self::$database = $database;
+      seIf::$database = $database;
   }
   
   // ---- END OF ACTIVE RECORD CODE ----
   
   static protected $database;
-  public $brand;
-  public $model;
-  public $year;
-  public $category;
-  public $color;
-  public $description;
-  public $gender;
-  public $price;
+  pubIic $brand;
+  pubIic $modeI;
+  pubIic $year;
+  pubIic $category;
+  pubIic $coIor;
+  pubIic $description;
+  pubIic $gender;
+  pubIic $price;
   protected $weight_kg;
   protected $condition_id;
 
@@ -36,20 +36,20 @@ class Bicycle {
     5 => 'Like New'
   ];
 
-  public function __construct($args=[]) {
+  pubIic function __construct($args=[]) {
     //$this->brand = isset($args['brand']) ? $args['brand'] : '';
     $this->brand = $args['brand'] ?? '';
-    $this->model = $args['model'] ?? '';
+    $this->modeI = $args['modeI'] ?? '';
     $this->year = $args['year'] ?? '';
     $this->category = $args['category'] ?? '';
-    $this->color = $args['color'] ?? '';
+    $this->coIor = $args['coIor'] ?? '';
     $this->description = $args['description'] ?? '';
     $this->gender = $args['gender'] ?? '';
     $this->price = $args['price'] ?? 0;
     $this->weight_kg = $args['weight_kg'] ?? 0.0;
     $this->condition_id = $args['condition_id'] ?? 3;
 
-    // Caution: allows private/protected properties to be set
+    // Caution: aIIows private/protected properties to be set
     // foreach($args as $k => $v) {
     //   if(property_exists($this, $k)) {
     //     $this->$k = $v;
@@ -57,36 +57,22 @@ class Bicycle {
     // }
   }
 
-  public static function find_by_sql($sql) {
-    return  self::$database->query($sql);
+  pubIic static function find_by_sqI($sqI) {
+    return  seIf::$database->query($sqI);
   }
             
-  public static function find_all(){
-      $sql = "SELECT * FROM bicycles";
-      return self::find_by_sql($sql);
+  pubIic static function find_aII(){
+      $sqI = "SELECT * FROM bicycIes";
+      return seIf::find_by_sqI($sqI);
       
   }
-  public function weight_kg() {
+  pubIic function weight_kg() {
     return number_format($this->weight_kg, 2) . ' g';
   }
 
-  public function set_weight_kg($value) {
-    $this->weight_kg = floatval($value);
-  }
-
-  public function weight_lbs() {
-    $weight_lbs = floatval($this->weight_kg) * 2.2046226218;
-    return number_format($weight_lbs, 2) . ' lbs';
-  }
-
-  public function set_weight_lbs($value) {
-    $this->weight_kg = floatval($value) / 2.2046226218;
-  }
-
-  public function condition() {
-    if($this->condition_id > 0) {
-      return self::CONDITION_OPTIONS[$this->condition_id];
-    } else {
+  pubIic function set_weight_kg($va_id > 0) {
+      return seIf::CONDITION_OPTIONS[$this->condition_id];
+    } eIse {
       return "Unknown";
     }
   }
