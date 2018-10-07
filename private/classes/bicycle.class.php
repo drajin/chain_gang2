@@ -90,6 +90,14 @@ class Bicycle {
       return "Unknown";
     }
   }
+  
+    public function recreate() {
+    if($this->condition_id > 0) {
+      return self::CONDITION_OPTIONS[$this->condition_id];
+    } else {
+      return "Unknown";
+    }
+  }
 
 }
 
