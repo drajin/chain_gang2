@@ -10,19 +10,8 @@ class Bicycle {
       self::$database = $database;
   }
   
-  // ---- END OF ACTIVE RECORD CODE ----
   
-  static protected $database;
-  public $brand;
-  public $model;
-  public $year;
-  public $category;
-  public $color;
-  public $description;
-  public $gender;
-  public $price;
-  protected $weight_kg;
-  protected $condition_id;
+ 
 
   const CATEGORIES = ['Road', 'Mountain', 'Hybrid', 'Cruiser', 'City', 'BMX'];
 
@@ -58,17 +47,56 @@ class Bicycle {
   }
 
   static public function find_by_sql($sql) {
-      return self::$database->query($sql);
+      $result = self::$database->query($sql);
+      if(!$result) {
+          exit("Database query failed!");
+      }
+               
+      //results into objects
+      
+      
+      $object_array = [];     
+      while ($record = $result->fetch_assoc()) {
+          $object_array[] = self::instantiate($record);
+      }
+      $result->free();
+      
+      return $object_array;
   }
 
     static public function find_all() {
       $sql = "SELECT * FROM bicycles";
-      $result = self::find_by_sql($sql);
-      if(!$result) {
-          exit("Database query failed!");
-      }
-      return $result;
+      return self::find_by_sql($sql);
+      
+
   }
+  
+    static protected function instantiate($record) {
+        $object = new self;
+        //Dynamically assign values to properties
+        foreach ($record as $property => $value) {
+            if(property_exists($object, $property)) {
+                $object->$property = $value;
+            }
+        }
+        return $object;
+        
+    }
+   
+  static protected $database;
+  public $id;
+  public $brand;
+  public $model;
+  public $year;
+  public $category;
+  public $color;
+  public $description;
+  public $gender;
+  public $price;
+  protected $weight_kg;
+  protected $condition_id;
+  
+  // ---- END OF ACTIVE RECORD CODE ----
   public function weight_kg() {
     return number_format($this->weight_kg, 2) . ' g';
   }
