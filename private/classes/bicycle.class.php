@@ -59,7 +59,7 @@ class Bicycle {
     }
     
     public function create() {
-        $attributes = $this->attributes();
+        $attributes = $this->sanitized_attributes();
         $sql = "INSERT INTO bicycles (";
         $sql .= join(', ', array_keys($attributes));
         $sql .= ") VALUES ('";
@@ -92,7 +92,15 @@ class Bicycle {
       return $attributes;
     }
     
-    
+    protected function sanitized_attributes() {
+        $sanitized = [];
+        foreach($this->attributes() as $key => $value){
+            $sanitized[$key] = self::$database->escape_string($value);
+        }
+        return $sanitized;
+    }
+
+        
     
     
   // ---- END OF ACTIVE RECORD CODE ----
@@ -131,10 +139,6 @@ class Bicycle {
   }
 
   
-  
-    
-
-
   public $id;
   public $brand;
   public $model;
