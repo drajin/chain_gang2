@@ -148,8 +148,8 @@ class Bicycle {
   public $description;
   public $gender;
   public $price;
-  protected $weight_kg;
-  protected $condition_id;
+  public $weight_kg;
+  public $condition_id;
   
  
   public function name() {
