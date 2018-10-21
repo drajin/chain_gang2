@@ -6,7 +6,10 @@ if(!isset($_GET['id'])) {
   redirect_to(url_for('/staff/bicycles/index.php'));
 }
 $id = $_GET['id'];
-
+$bicycle = Bicycle::find_by_id($id);
+    if($bicycle == false) {
+        redirect_to(url_for('staff/bicycles/index.php'));
+    }
 
 if(is_post_request()) {
 
@@ -23,7 +26,8 @@ if(is_post_request()) {
   $args['condition_id'] = $_POST['condition_id'] ?? NULL;
   $args['description'] = $_POST['description'] ?? NULL;
 
-  $bicycle = [];
+  $bicycle->merge_attributes($args);
+  $result = $bicycle->update();
 
   $result = false;
   if($result === true) {
@@ -34,10 +38,7 @@ if(is_post_request()) {
   }
 
 } else {
-    $bicycle = Bicycle::find_by_id($id);
-    if($bicycle == false) {
-        redirect_to(url_for('staff/bicycles/index.php'));
-    }
+    
 }
 
 ?>
