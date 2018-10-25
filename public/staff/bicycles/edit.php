@@ -18,7 +18,6 @@ if(is_post_request()) {
   $bicycle->merge_attributes($args);
   $result = $bicycle->save();
 
-  $result = false;
   if($result === true) {
     $_SESSION['message'] = 'The bicycle was updated successfully.';
     redirect_to(url_for('/staff/bicycles/show.php?id=' . $id));
