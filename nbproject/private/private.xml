@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/xampp/htdocs/chain_gang2/public/staff/bicycles/edit.php</file>
             <file>file:/C:/xampp/htdocs/chain_gang2/public/staff/bicycles/new.php</file>
+            <file>file:/C:/xampp/htdocs/chain_gang2/private/validation_functions.php</file>
+            <file>file:/C:/xampp/htdocs/chain_gang2/private/initialize.php</file>
+            <file>file:/C:/xampp/htdocs/chain_gang2/private/classes/bicycle.class.php</file>
         </group>
     </open-files>
 </project-private>
