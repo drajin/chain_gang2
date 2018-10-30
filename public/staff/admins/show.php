@@ -8,7 +8,7 @@ $admin = Admin::find_by_id($id);
 
 ?>
 
-<?php $page_title = 'Show Bicycle: ' . h($admin->name()); ?>
+<?php $page_title = 'Show Bicycle: ' . h($admin->full_name()); ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
@@ -17,7 +17,7 @@ $admin = Admin::find_by_id($id);
 
   <div class="admin show">
 
-    <h1>Admin: <?php echo h($admin->name()); ?></h1>
+    <h1>Admin: <?php echo h($admin->full_name()); ?></h1>
 
     <div class="attributes">
       <dl>

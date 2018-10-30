@@ -36,7 +36,7 @@ if(is_post_request()) {
   <div class="bicycle delete">
     <h1>Delete Bicycle</h1>
     <p>Are you sure you want to delete this bicycle?</p>
-    <p class="item"><?php echo h($bicycle->name()); ?></p>
+    <p class="item"><?php echo h($bicycle->full_name()); ?></p>
 
     <form action="<?php echo url_for('/staff/bicycles/delete.php?id=' . h(u($id))); ?>" method="post">
       <div id="operations">

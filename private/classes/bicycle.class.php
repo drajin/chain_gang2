@@ -60,7 +60,7 @@ class Bicycle extends DatabaseObject {
   public $condition_id;
   
  
-  public function name() {
+  public function full_name() {
       return $this->brand . " " . $this->model . " " . $this->year;
   }
 

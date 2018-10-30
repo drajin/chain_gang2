@@ -8,7 +8,7 @@ $bicycle = Bicycle::find_by_id($id);
 
 ?>
 
-<?php $page_title = 'Show Bicycle: ' . h($bicycle->name()); ?>
+<?php $page_title = 'Show Bicycle: ' . h($bicycle->full_name()); ?>
 <?php include(SHARED_PATH . '/staff_header.php'); ?>
 
 <div id="content">
@@ -17,7 +17,7 @@ $bicycle = Bicycle::find_by_id($id);
 
   <div class="bicycle show">
 
-    <h1>Bicycle: <?php echo h($bicycle->name()); ?></h1>
+    <h1>Bicycle: <?php echo h($bicycle->full_name()); ?></h1>
 
     <div class="attributes">
       <dl>

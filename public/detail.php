@@ -12,7 +12,7 @@ if(!$id) {
 
 ?>
 
-<?php $page_title = 'Detail: ' . $bike->name(); ?>
+<?php $page_title = 'Detail: ' . $bike->full_name(); ?>
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <div id="main">
