@@ -65,7 +65,9 @@ class DatabaseObject {
         if(is_blank($this->model)) {
             $this->errors[] = "Model cannot be blank.";
         }
+        
         return $this->errors;
+        
     }
 
 
