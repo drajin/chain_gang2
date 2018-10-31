@@ -41,7 +41,41 @@ class Admin extends DatabaseObject {
       return $this->hashed_password = password_hash($this->password, PASSWORD_BCRYPT);
   }
   
-  protected function validate() {
+  public function verify_password($password) {
+      return password_verify($password, $this->hashed_password);
+  }
+  
+  public function find_by_username($username){
+        $sql = "SELECT * FROM " . static::$table_name . " ";
+        $sql .="WHERE username='" . static::$database->escape_string($username) . "'";
+        $obj_array = static::find_by_sql($sql);
+        if(!empty($obj_array)) {
+            return array_shift($obj_array);
+        } else {
+            return false;
+        }
+    }
+
+
+    
+    protected function create() {
+        $this->set_hashed_password();
+        return parent::create();
+    }
+    
+    protected function update() {
+      if($this->password != '') {
+        $this->set_hashed_password();
+        // validate password
+      } else {
+        // password not being updated, skip hashing and validation
+        $this->password_required = false;
+      }
+ 
+      return parent::update();
+    }
+    
+      protected function validate() {
     $this->errors = [];
 
     if(is_blank($this->first_name)) {
@@ -69,7 +103,7 @@ class Admin extends DatabaseObject {
     } elseif (!has_length($this->username, array('min' => 5, 'max' => 255))) {
       $this->errors[] = "Username must be between 5 and 255 characters.";
     } elseif (!has_unique_username($this->username, $this->id ?? 0)){
-      $this->errors[] = "Username allready taken.";  
+      $this->errors[] = "Username already taken.";  
     }
     
     
@@ -95,36 +129,6 @@ class Admin extends DatabaseObject {
           }    
         }
         return $this->errors;
-    }
-    
-    public function find_by_username($username){
-        $sql = "SELECT * FROM admins ";
-        $sql .="WHERE username='" . static::$database->escape_string($username) . "'";
-        $obj_array = static::find_by_sql($sql);
-        if(!empty($obj_array)) {
-            return array_shift($obj_array);
-        } else {
-            return false;
-        }
-    }
-
-
-    
-    protected function create() {
-        $this->set_hashed_password();
-        return parent::create();
-    }
-    
-    protected function update() {
-      if($this->password != '') {
-        $this->set_hashed_password();
-        // validate password
-      } else {
-        // password not being updated, skip hashing and validation
-        $this->password_required = false;
-      }
- 
-      return parent::update();
     }
 
 }
