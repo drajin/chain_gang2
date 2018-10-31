@@ -68,7 +68,10 @@ class Admin extends DatabaseObject {
       $this->errors[] = "Username cannot be blank.";
     } elseif (!has_length($this->username, array('min' => 5, 'max' => 255))) {
       $this->errors[] = "Username must be between 5 and 255 characters.";
+    } elseif (!has_unique_username($this->username, $this->id ?? 0)){
+      $this->errors[] = "Username allready taken.";  
     }
+    
     
     if($this->password_required) {
         if(is_blank($this->password)) {
@@ -92,6 +95,17 @@ class Admin extends DatabaseObject {
           }    
         }
         return $this->errors;
+    }
+    
+    public function find_by_username($username){
+        $sql = "SELECT * FROM admins ";
+        $sql .="WHERE username='" . static::$database->escape_string($username) . "'";
+        $obj_array = static::find_by_sql($sql);
+        if(!empty($obj_array)) {
+            return array_shift($obj_array);
+        } else {
+            return false;
+        }
     }
 
 
