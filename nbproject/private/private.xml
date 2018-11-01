@@ -3,11 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/chain_gang2/public/staff/login.php</file>
-            <file>file:/C:/xampp/htdocs/chain_gang2/public/staff/bicycles/form_fields.php</file>
-            <file>file:/C:/xampp/htdocs/chain_gang2/private/db_credentials.php</file>
-            <file>file:/C:/xampp/htdocs/chain_gang2/private/functions.php</file>
-            <file>file:/C:/xampp/htdocs/chain_gang2/private/classes/admin.class.php</file>
+            <file>file:/C:/xampp/htdocs/chain_gang2/private/classes/session.class.php</file>
         </group>
     </open-files>
 </project-private>
