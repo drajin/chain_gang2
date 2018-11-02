@@ -59,7 +59,22 @@
             } else {
                 return true;
             }
-        } 
+        }
+        
+        public function message($msg='') {
+            if(!empty($msg)){
+                // The this is a set message
+                $_SESSION['message'] = $msg;
+                return true;
+            } else {
+                // this is a get message
+                return $_SESSION['message'] ?? '';
+            }
+        }
+        
+        public function clear_message() {
+            unset($_SESSION['message']);
+        }
     }
 
 
