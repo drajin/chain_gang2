@@ -23,7 +23,7 @@ if(is_post_request()) {
   
   if($result === true) {
     $new_id = $bicycle->id;
-    $session->message = ('The bicycle was created successfully.');
+    $session->message('The bicycle was created successfully.');
     redirect_to(url_for('/staff/bicycles/show.php?id=' . $new_id));
   } else {
     // show errors
