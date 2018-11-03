@@ -1,6 +1,19 @@
 <?php require_once('../../../private/initialize.php'); ?>
-
 <?php
+
+// Find all bicycles;
+//$bicycles = Bicycle::find_all();
+$current_page = $_GET['page'] ?? 1;
+$per_page = 2;
+$total_count = Admin::count_all(); 
+        
+$pagination = new Pagination($current_page, $per_page, $total_count);
+
+$sql = "SELECT * FROM admins ";
+$sql .= "LIMIT {$per_page} ";
+$sql .= "OFFSET {$pagination->offset()}";
+$bicycles = Admin::find_by_sql($sql);
+
  require_login();
   // Find all admins;
 $admins = Admin::find_all();
@@ -42,7 +55,12 @@ $admins = Admin::find_all();
     	  </tr>
       <?php } ?>
   	</table>
+<?php 
+    $url = url_for('/staff/admins/index.php');
+    echo $pagination->page_links($url);
+    
 
+?>
   </div>
 
 </div>
