@@ -1,28 +1,17 @@
 <?php
 
-class Bicycle {
+class Bicycle extends DatabaseObject {
     
-  // ---- START OF ACTIVE RECORD CODE ----    
+   
+  static protected $table_name = 'bicycles';  
+  static protected $db_columns = ['id', 'brand', 'model', 'year', 'category', 'color', 'gender', 'price', 'weight_kg', 'condition_id', 'description'];
+  
     
   
-
-  function set_database($database) {
-      self::$database = $database;
-  }
-  
-  // ---- END OF ACTIVE RECORD CODE ----
-  
-  static protected $database;
-  public $brand;
-  public $model;
-  public $year;
-  public $category;
-  public $color;
-  public $description;
-  public $gender;
-  public $price;
-  protected $weight_kg;
-  protected $condition_id;
+        
+    
+    
+ 
 
   const CATEGORIES = ['Road', 'Mountain', 'Hybrid', 'Cruiser', 'City', 'BMX'];
 
@@ -57,15 +46,25 @@ class Bicycle {
     // }
   }
 
-  public static function find_by_sql($sql) {
-    return  self::$database->query($sql);
+  
+  public $id;
+  public $brand;
+  public $model;
+  public $year;
+  public $category;
+  public $color;
+  public $description;
+  public $gender;
+  public $price;
+  public $weight_kg;
+  public $condition_id;
+  
+ 
+  public function full_name() {
+      return $this->brand . " " . $this->model . " " . $this->year;
   }
-            
-  public static function find_all(){
-      $sql = "SELECT * FROM bicycles";
-      return self::find_by_sql($sql);
-      
-  }
+
+
   public function weight_kg() {
     return number_format($this->weight_kg, 2) . ' g';
   }
@@ -90,6 +89,12 @@ class Bicycle {
       return "Unknown";
     }
   }
+  
+      protected function validate() {
+        $this->errors = [];
+      //Add custom validations 
+        return $this->errors;
+    }
 
 }
 
